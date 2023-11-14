@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GameOnGeorgia - Your Guide to Local Game Stores</title>
+    <meta charset="utf-8">
+    <link href="gameongeorgia.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <img src="logo.jpg" alt="GameOnGeorgia Logo">
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gamestores.html">Game Stores</a></li> 
+                <li><a href="eventscalendar.html">Events Calendar</a></li>
+                <li><a href="comingsoon.html">User Reviews</a></li> 
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <main>
+			<div id="calendar-container">
+				<button id="prev-month">Previous</button>
+				<div id="current-month-year" class="month-year"></div>
+				<button id="next-month">Next</button>
+				<div id="calendar" class="calendar-grid"></div>
+			</div>
+        </main>
+        <footer>
+            <a href="mailto:GameOnGeorgia@gmail.com">GameOnGeorgia@gmail.com</a>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    const prevMonthEl = document.getElementById('prev-month');
+    const nextMonthEl = document.getElementById('next-month');
+    const monthYearEl = document.getElementById('current-month-year');
+
+    let currentYear = new Date().getFullYear();
+    let currentMonth = new Date().getMonth();
+
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+                        "July", "August", "September", "October", "November", "December"];
+
+    function updateMonthYearDisplay(year, month) {
+        monthYearEl.textContent = `${monthNames[month]} ${year}`;
+    }
+
+    function createCalendar(year, month) {
+        updateMonthYearDisplay(year, month);
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        let calendarHTML = '';
+        for (let day = 1; day <= daysInMonth; day++) {
+            calendarHTML += `<div class="calendar-day">${day}</div>`;
+        }
+        calendarEl.innerHTML = calendarHTML;
+    }
+
+    prevMonthEl.addEventListener('click', function() {
+        if (currentMonth === 0) {
+            currentMonth = 11;
+            currentYear--;
+        } else {
+            currentMonth--;
+        }
+        createCalendar(currentYear, currentMonth);
+    });
+
+    nextMonthEl.addEventListener('click', function() {
+        if (currentMonth === 11) {
+            currentMonth = 0;
+            currentYear++;
+        } else {
+            currentMonth++;
+        }
+        createCalendar(currentYear, currentMonth);
+    });
+
+    createCalendar(currentYear, currentMonth);
+});
+    </script>
+</body>
+</html>
