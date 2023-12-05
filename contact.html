@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link href="gameongeorgia.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Get in touch with GameOnGeorgia. Reach out to add a game store, submit a review, share an event, provide feedback, or seek support. We're here to enhance your gaming experience in Georgia.">
 </head>
 <body>
     <div id="wrapper">
@@ -16,18 +17,39 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="gamestores.html">Game Stores</a></li>
                 <li><a href="eventscalendar.html">Events Calendar</a></li>
-                <li><a href="comingsoon.html">User Reviews</a></li>
+                <li><a href="userreviews.html">User Reviews</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
-        <main>
-            <h2>Contact GameOnGeorgia</h2>
-            <p>If you have any questions, want to submit reviews, or notify us of upcoming events, please feel free to contact us using the email address below:</p>
-            <p>Email: <a href="mailto:gameongeorgia@gmail.com">gameongeorgia@gmail.com</a></p>
-        </main>
+		<main>
+		<h2> Contact GameOnGeorgia</h2>
+		<p>Fill out the form below to contact GameOnGeorgia. All information is required. </p>
+		<form method="post" action="https://webdevbasics.net/scripts/demo.php" style="padding-top: 20px;">
+
+			<label for="name">Name: </label>
+			<input type="text" id="name" name="name" required>
+			
+			<label for="email">E-mail: </label>
+			<input type="email" id="email" name="email" required>
+			
+			<label for="reason">Reason for Contact: </label>
+			<select id="reason" name="reason">
+				<option value="Add a store">Add a store</option>
+				<option value="Add a review">Add a review</option>
+				<option value="Add an event">Add an event</option>
+				<option value="feedback">Feedback</option>
+				<option value="support">Support</option>
+			</select>
+		
+			<label for="comments">Comments: </label>
+			<textarea id="comments" name="comments" rows="4" cols="50" required></textarea>
+			
+			<input type="submit" value="Send">
+		</form>
+		  </main>
         <footer>
             Copyright &copy; 2023 GameOnGeorgia<br>
-            <a href="mailto:contact@gameongeorgia.com">contact@gameongeorgia.com</a>
+            <a href="mailto:GameOnGeorgia2023@gmail.com">GameOnGeorgia2023@gmail.com</a>
         </footer>
     </div>
 </body>

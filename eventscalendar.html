@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link href="gameongeorgia.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Explore gaming events in Georgia with GameOnGeorgia's interactive events calendar. Stay updated on the latest board and card game events, tournaments, and meetups happening near you. Plan your next gaming adventure today.">
 </head>
 <body>
     <div id="wrapper">
@@ -16,26 +17,37 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="gamestores.html">Game Stores</a></li> 
                 <li><a href="eventscalendar.html">Events Calendar</a></li>
-                <li><a href="comingsoon.html">User Reviews</a></li> 
+                <li><a href="userreviews.html">User Reviews</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </nav>
+		
         <main>
-			<div id="calendar-container">
-				<button id="prev-month">Previous</button>
-				<div id="current-month-year" class="month-year"></div>
-				<button id="next-month">Next</button>
-				<div id="calendar" class="calendar-grid"></div>
-			</div>
+		<div id="events-container">
+			<button id="prev-month" class="button-margin">Previous Month</button>
+			<div id="current-month-year" class="month-year"></div>
+			<button id="next-month" class="button-margin">Next Month</button>
+			<table id="events-table" class="events-table">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Event</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Events will be populated here -->
+				</tbody>
+			</table>
+		</div>
         </main>
         <footer>
-            <a href="mailto:GameOnGeorgia@gmail.com">GameOnGeorgia@gmail.com</a>
+            Copyright &copy; 2023 GameOnGeorgia<br>
+            <a href="mailto:GameOnGeorgia2023@gmail.com">GameOnGeorgia2023@gmail.com</a>
         </footer>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const calendarEl = document.getElementById('calendar');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const eventsEl = document.getElementById('events-list');
     const prevMonthEl = document.getElementById('prev-month');
     const nextMonthEl = document.getElementById('next-month');
     const monthYearEl = document.getElementById('current-month-year');
@@ -46,19 +58,39 @@
     const monthNames = ["January", "February", "March", "April", "May", "June",
                         "July", "August", "September", "October", "November", "December"];
 
+    const events = [
+        { date: '2023-12-09', time: '11:00', title: 'cEDH at CCS', url: 'https://www.facebook.com/events/1059875715035783/' },
+        { date: '2023-12-10', time: '11:00', title: 'CCS December Lorcana Event', url: 'https://www.facebook.com/events/2693281957488488' },
+        { date: '2023-12-16', time: '14:00', title: 'The Lost Caverns of Ixalan Commander Party', url: 'https://www.facebook.com/events/884358333360463/' },
+		{ date: '2023-11-04', time: '10:00', title: 'Superheroes Fall Toy/Pop Swap', url: 'https://www.facebook.com/events/1742047032908748/' },
+		{ date: '2024-01-06', time: '11:00', title: 'Tiffany Grant Meet & Greet at CCS', url: 'https://www.facebook.com/events/361443536254965' }
+		
+		
+    ];
+
     function updateMonthYearDisplay(year, month) {
         monthYearEl.textContent = `${monthNames[month]} ${year}`;
     }
 
-    function createCalendar(year, month) {
-        updateMonthYearDisplay(year, month);
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        let calendarHTML = '';
-        for (let day = 1; day <= daysInMonth; day++) {
-            calendarHTML += `<div class="calendar-day">${day}</div>`;
-        }
-        calendarEl.innerHTML = calendarHTML;
-    }
+function createEventsList(year, month) {
+    updateMonthYearDisplay(year, month);
+    const monthEvents = events.filter(event => {
+        const eventDate = new Date(event.date);
+        return eventDate.getFullYear() === year && eventDate.getMonth() === month;
+    });
+
+    let eventsHTML = '';
+    monthEvents.forEach(event => {
+        const eventDate = new Date(event.date);
+eventsHTML += `<tr>
+            <td>${eventDate.getMonth() + 1}/${eventDate.getDate()} at ${event.time}</td>
+            <td><a href="${event.url}" target="_blank">${event.title}</a></td>
+        </tr>`;
+    });
+
+    const tableBody = document.querySelector('#events-table tbody');
+    tableBody.innerHTML = eventsHTML;
+}
 
     prevMonthEl.addEventListener('click', function() {
         if (currentMonth === 0) {
@@ -67,7 +99,7 @@
         } else {
             currentMonth--;
         }
-        createCalendar(currentYear, currentMonth);
+        createEventsList(currentYear, currentMonth);
     });
 
     nextMonthEl.addEventListener('click', function() {
@@ -77,11 +109,11 @@
         } else {
             currentMonth++;
         }
-        createCalendar(currentYear, currentMonth);
+        createEventsList(currentYear, currentMonth);
     });
 
-    createCalendar(currentYear, currentMonth);
+    createEventsList(currentYear, currentMonth);
 });
-    </script>
+</script>
 </body>
 </html>
