@@ -40,6 +40,13 @@
 				<option value="feedback">Feedback</option>
 				<option value="support">Support</option>
 			</select>
+			
+			<label for="store-select" id="store-label" style="display: none;">Select Store:</label>
+			<select id="store-select" name="store" disabled style="display: none;">
+				<option value="superheroes">Super Heroes Cards Comics and Games</option>
+				<option value="levelupgames">Level-Up Games</option>
+				<option value="charlies">Charlie's Collectible Show</option>		
+			</select>
 		
 			<label for="comments">Comments: </label>
 			<textarea id="comments" name="comments" rows="4" cols="50" required></textarea>
@@ -52,5 +59,25 @@
             <a href="mailto:GameOnGeorgia2023@gmail.com">GameOnGeorgia2023@gmail.com</a>
         </footer>
     </div>
+	<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var reasonSelect = document.getElementById('reason');
+        var storeSelect = document.getElementById('store-select');
+        var storeLabel = document.getElementById('store-label');
+
+        reasonSelect.addEventListener('change', function() {
+            if (this.value === 'Add a review' || this.value === 'Add an event') {
+                storeSelect.disabled = false;
+                storeSelect.style.display = 'block';
+                storeLabel.style.display = 'block';
+            } else {
+                storeSelect.disabled = true;
+                storeSelect.style.display = 'none';
+                storeLabel.style.display = 'none';
+            }
+        });
+    });
+</script>
 </body>
+
 </html>
